@@ -1,0 +1,21 @@
+<div class='card'>
+    <div class='card-body'>
+      <div class='table-responsive'>
+        <table class='table' *ngIf = 'playlists && playlists.length'>
+          <thead>
+            <tr>
+              <th>nazwa</th>
+              <th>ilość utworów</th>
+              <th>długość</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor='let playlist of playlists'>
+              <td>{{playlist.name}}</td>
+              <td>{{playlist.totalTracks}}</td>
+              <td>{{playlist.duration}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>

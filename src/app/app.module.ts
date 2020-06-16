@@ -12,6 +12,8 @@ import { ProductDetailComponent } from './product/product-detail.component';
 import { WelcomeComponent } from './home/welcome.component';
 import { ProductDetailGuard } from './product/product-detail.guard';
 import { PlaylistComponent } from './playlist/playlist.component';
+import { PlaylistListComponent } from './playlist/playlist-list.component';
+
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { PlaylistComponent } from './playlist/playlist.component';
     StarComponent,
     ProductDetailComponent,
     PlaylistComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    PlaylistListComponent
   ],
   imports: [
     BrowserModule,
@@ -31,6 +34,7 @@ import { PlaylistComponent } from './playlist/playlist.component';
       {path: 'welcome' , component: WelcomeComponent},
       {path: 'products', component: ProductListComponent},
       {path: 'playlist', component: PlaylistComponent},
+      {path: 'playlists', component: PlaylistListComponent},
       {path: 'products/:id', 
       canActivate: [ProductDetailGuard],
       component: ProductDetailComponent},

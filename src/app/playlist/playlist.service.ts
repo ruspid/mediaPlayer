@@ -10,7 +10,8 @@ import { IPlayList } from './playlist';
 })
 export class PlaylistService{
 
-  private playlistUrl = 'api/tracks.json';
+  private playlistUrl = 'api/playlist.json';
+  private playlistListUrl = 'api/playlists.json';
 
   constructor(private httpClient: HttpClient){}
 
@@ -20,6 +21,13 @@ export class PlaylistService{
           catchError(this.handleError)
         );
   }
+
+  getPlaylistList(): Observable<IPlayList[]>{
+    return this.httpClient.get<IPlayList[]>(this.playlistListUrl).pipe(
+      tap(data => console.log('All: ' + JSON.stringify(data))),
+      catchError(this.handleError)
+    );
+}
 
   private handleError(err: HttpErrorResponse){
       return throwError(err.message);

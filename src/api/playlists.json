@@ -1,0 +1,81 @@
+[{
+    "name": "great songs",
+    "duration": 323,
+    "totalTracks": 5,
+    "tracks": [
+        {
+            "id": "ashbfasbkj",
+            "artist": "janis jopin",
+            "duration": 246,
+            "title": "piece of my heart"
+        },
+        {
+            "id": "faskfsak",
+            "artist": "steave miller band",
+            "duration": 256,
+            "title": "the joker"
+        },
+        {
+            "id": "ansdmas",
+            "artist": "jimi hendrix",
+            "duration": 167,
+            "title": "purple haze"
+        },
+        {
+            "id": "lkansfn",
+            "artist": "jimi hendrix",
+            "duration": 343,
+            "title": "hey joe"
+        },
+        {
+            "id": "wegfbfdhj",
+            "artist": "the rolling stones",
+            "duration": 321,
+            "title": "sympathy for the devil"
+        }
+    ]
+},
+{
+    "name": "calm",
+    "duration": 211,
+    "totalTracks": 2,
+    "tracks": [
+        {
+            "id": "ashbfasbkj",
+            "artist": "janis jopin",
+            "duration": 246,
+            "title": "piece of my heart"
+        },
+        {
+            "id": "faskfsak",
+            "artist": "steave miller band",
+            "duration": 256,
+            "title": "the joker"
+        }
+    ]
+},
+{
+    "name": "old songs",
+    "duration": 123,
+    "totalTracks": 3,
+    "tracks": [
+        {
+            "id": "ansdmas",
+            "artist": "jimi hendrix",
+            "duration": 167,
+            "title": "purple haze"
+        },
+        {
+            "id": "lkansfn",
+            "artist": "jimi hendrix",
+            "duration": 343,
+            "title": "hey joe"
+        },
+        {
+            "id": "wegfbfdhj",
+            "artist": "the rolling stones",
+            "duration": 321,
+            "title": "sympathy for the devil"
+        }
+    ]
+}]
