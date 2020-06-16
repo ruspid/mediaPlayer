@@ -11,6 +11,7 @@ import { StarComponent } from './shared/star.component';
 import { ProductDetailComponent } from './product/product-detail.component';
 import { WelcomeComponent } from './home/welcome.component';
 import { ProductDetailGuard } from './product/product-detail.guard';
+import { PlaylistComponent } from './playlist/playlist.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { ProductDetailGuard } from './product/product-detail.guard';
     ConvertToSpacesPipe,
     StarComponent,
     ProductDetailComponent,
+    PlaylistComponent,
     WelcomeComponent
   ],
   imports: [
@@ -28,6 +30,7 @@ import { ProductDetailGuard } from './product/product-detail.guard';
     RouterModule.forRoot([
       {path: 'welcome' , component: WelcomeComponent},
       {path: 'products', component: ProductListComponent},
+      {path: 'playlist', component: PlaylistComponent},
       {path: 'products/:id', 
       canActivate: [ProductDetailGuard],
       component: ProductDetailComponent},

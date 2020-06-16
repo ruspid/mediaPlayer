@@ -1,0 +1,24 @@
+<div class='card'>
+  <div class='card-header'>
+   <!-- {{pageTitle}} -->
+  </div>
+  <div class='card-body'>
+    <div class='table-responsive'>
+      <table class='table' *ngIf = 'tracks && tracks.length'>
+        <thead>
+          <tr>
+            <th>nazwa {{name}}</th>
+            <th>ilość utworów {{totalTracks}} utworów</th>
+            <th>długość {{duration}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor='let track of tracks'>
+            <td>{{track.title}}</td>
+            <td>{{track.artist}}</td>
+            <td>{{track.duration}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
