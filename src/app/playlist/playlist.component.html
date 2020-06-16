@@ -4,16 +4,16 @@
   </div>
   <div class='card-body'>
     <div class='table-responsive'>
-      <table class='table' *ngIf = 'tracks && tracks.length'>
+      <table class='table' *ngIf = 'playlist.tracks && playlist.tracks.length'>
         <thead>
           <tr>
-            <th>nazwa {{name}}</th>
-            <th>ilość utworów {{totalTracks}} utworów</th>
-            <th>długość {{duration}}</th>
+            <th>nazwa {{playlist.name}}</th>
+            <th>ilość utworów {{playlist.totalTracks}} utworów</th>
+            <th>długość {{playlist.duration}}</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor='let track of tracks'>
+          <tr *ngFor='let track of playlist.tracks'>
             <td>{{track.title}}</td>
             <td>{{track.artist}}</td>
             <td>{{track.duration}}</td>

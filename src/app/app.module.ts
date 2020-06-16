@@ -33,8 +33,8 @@ import { PlaylistListComponent } from './playlist/playlist-list.component';
     RouterModule.forRoot([
       {path: 'welcome' , component: WelcomeComponent},
       {path: 'products', component: ProductListComponent},
-      {path: 'playlist', component: PlaylistComponent},
       {path: 'playlists', component: PlaylistListComponent},
+      {path: 'playlists/:id', component: PlaylistComponent},
       {path: 'products/:id', 
       canActivate: [ProductDetailGuard],
       component: ProductDetailComponent},

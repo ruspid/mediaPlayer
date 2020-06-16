@@ -11,7 +11,9 @@
           </thead>
           <tbody>
             <tr *ngFor='let playlist of playlists'>
-              <td>{{playlist.name}}</td>
+                <td><a [routerLink]="['/playlists', playlist.id]">
+                    {{playlist.name}}
+                  </a></td>
               <td>{{playlist.totalTracks}}</td>
               <td>{{playlist.duration}}</td>
             </tr>

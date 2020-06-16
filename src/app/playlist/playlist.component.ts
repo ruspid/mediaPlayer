@@ -1,31 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 import { PlaylistService } from './playlist.service';
 import { ITrack } from './track';
+import { IPlayList } from './playlist';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   templateUrl: './playlist.component.html',
   styleUrls: ['./playlist.component.css']
 })
 export class PlaylistComponent implements OnInit {
+  playlist: IPlayList;
 
-  constructor(private _playlistService: PlaylistService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router, 
+    private _playlistService: PlaylistService){}
 
-  tracks: ITrack[];
-  name: string;
-  totalTracks: number;
-  duration: number;
-
-  
   ngOnInit(): void {
-    this._playlistService.getPlaylist().subscribe({
-      next: playlist  => {
-          this.tracks = playlist.tracks;
-          this.name = playlist.name;
-          this.totalTracks = playlist.totalTracks;
-          this.duration = playlist.duration;
-      },
-      error: err => console.log("   EROR  " + err)
-    });
+    let id = +this.route.snapshot.paramMap.get('id');
+    this._playlistService.getPlaylist(id.toString()).subscribe({
+          next: playlist  => this.playlist = playlist,
+          error: err => console.log("   EROR  " + err)
+        });
   }
 
+  onBack(): void {
+    this.router.navigate(['/playlists']);
+  }
 }

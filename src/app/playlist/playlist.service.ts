@@ -15,7 +15,7 @@ export class PlaylistService{
 
   constructor(private httpClient: HttpClient){}
 
-  getPlaylist(): Observable<IPlayList>{
+  getPlaylist(id: string): Observable<IPlayList>{
         return this.httpClient.get<IPlayList>(this.playlistUrl).pipe(
           tap(data => console.log('All: ' + JSON.stringify(data))),
           catchError(this.handleError)
