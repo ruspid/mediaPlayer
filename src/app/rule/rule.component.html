@@ -1,19 +1,18 @@
 <div class="row">
-      <form [formGroup]="ruleForm" (ngSubmit)="onSavePokemon()">
-  
-        <!-- <div class="form-group form-check form-check-inline" *ngFor="let type of values">
-            <input class="form-check-input" [value]="type" type="checkbox" (change)="onCheckChange($event)" id="type">
-            <label class="form-check-label" for="type">{{type}}</label>
-          </div> -->
+      <form [formGroup]="ruleForm" (ngSubmit)="onSubmit()">
 
+        <div class="form-group">
+            <label for="name">Nazwa</label>
+            <input type="text" id="name" class="form-control" formControlName="name">
+        </div>
 
-        <div class="form-group form-check form-check-inline" *ngFor="let state of behavioralStates">
-          <input class="form-check-input" [value]="state" type="checkbox" (change)="onCheckChange($event)" id="behavioralState">
+        <div class="form-group form-check" *ngFor="let state of behavioralStates">
+          <input class="form-check-input" [value]="state" type="checkbox" (change)="onBehavioralStateChange($event)" id="behavioralState">
           <label class="form-check-label" for="state">{{state}}</label>
         </div>
         
-        <div class="form-group form-check form-check-inline" *ngFor="let attempt of CommunicationAttempts">
-            <input class="form-check-input" [value]="attempt" type="checkbox" id="communicationAttempt">
+        <div class="form-group form-check" *ngFor="let attempt of CommunicationAttempts">
+            <input class="form-check-input" [value]="attempt" type="checkbox" (change)="onCommunicationAttemptChange($event)" id="communicationAttempt">
             <label class="form-check-label" for="attempt">{{attempt}}</label>
         </div>
 

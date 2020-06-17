@@ -24,47 +24,16 @@ export class RuleComponent implements OnInit {
 
   initForm() {
     this.ruleForm = this.formBuilder.group({
-      behavioralState: new FormArray([]),
-      communicationAttempt:  new FormArray([])
+      behavioralState: new FormArray([],[Validators.required]),
+      communicationAttempt:  new FormArray([],[Validators.required]),
+      name: ['', Validators.required]
       // types: new FormArray([],[Validators.required]) if you want to add validators['', Validators.required]
     });
   }
 
-  // save the pokemon
-  // onSavePokemon() {
-  //   const behavioralState = this.ruleForm.get('behavioralState').value;
-  //   const communicationAttempt = this.ruleForm.get('communicationAttempt').value;
-  //   console.log(behavioralState + "    " + communicationAttempt);
-    // const id = this.pokemonForm.get('id').value;
-    // const nom = this.pokemonForm.get('nom').value;
-    // const type = this.pokemonForm.get('type').value;
-    // const description = this.pokemonForm.get('description').value;
-
-    // const newPokemon = new Pokemon(id, nom, type, description);
-    // if (this.fileUrl && this.fileUrl !== '') {
-    //   newPokemon.photo = this.fileUrl;
-    // }
-    // this.pokemonService.createNewPokemon(newPokemon);
-    // this.router.navigate(['/liste-pokemon']);
-  // }
-
-// values = Object.keys(Types);
-
-
-// initForm() {
-//    this.pokemonForm = this.formBuilder.group({
-//      id: ['', Validators.required],
-//      nom: ['', Validators.required],
-//      types: new FormArray([]), 
-//      // types: new FormArray([],[Validators.required]) if you want to add validators
-//      description: ''
-//   });
-//  }
-
- // save the pokemon
- onSavePokemon(){
+ onSubmit(){
     // store final array after submit
-
+    const name: string = this.ruleForm.get('name').value
     const behavioralState: FormArray = this.ruleForm.get('behavioralState') as FormArray;
     const communicationAttempt: FormArray = this.ruleForm.get('communicationAttempt') as FormArray;
     // After submit store all checked values in array 
@@ -82,6 +51,7 @@ export class RuleComponent implements OnInit {
       console.log("ctrl is ",ctrl);
       communicationAttempts.push(ctrl.value); // types declared on top
     });
+    console.log("  name   " + name)
 
    console.log(" behavioralStates ", behavioralStates);
    console.log(" communicationAttempts ", communicationAttempts);
@@ -91,7 +61,7 @@ export class RuleComponent implements OnInit {
 
 //  }
 
- onCheckChange(event) {
+onBehavioralStateChange(event) {
     const formArray: FormArray = this.ruleForm.get('behavioralState') as FormArray;
 
     /* Selected */
@@ -114,11 +84,31 @@ export class RuleComponent implements OnInit {
        i++;
       });
    }
-   console.log("Total Form is ",this.ruleForm);
-
-
-
   }
 
+  onCommunicationAttemptChange(event) {
+  const formArray: FormArray = this.ruleForm.get('communicationAttempt') as FormArray;
+
+  /* Selected */
+  if(event.target.checked){
+     // Add a new control in the arrayForm
+     formArray.push(new FormControl(event.target.value));
+   }
+   /* unselected */
+   else{
+      // find the unselected element
+     let i: number = 0;
+
+    formArray.controls.forEach((ctrl: FormControl) => {
+      if(ctrl.value == event.target.value) {
+      // Remove the unselected element from the arrayForm
+      formArray.removeAt(i);
+      return;
+     }
+
+     i++;
+    });
+ }
+}
 
 }
