@@ -1,14 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { PlaylistService } from './playlist.service';
 import { PlayList } from './playlist';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ITrack } from '../track/track';
 
 @Component({
+  selector: "playlist-component",
   templateUrl: './playlist.component.html',
   styleUrls: ['./playlist.component.css']
 })
 export class PlaylistComponent implements OnInit {
-  playlist: PlayList;
+  
+  @Output() demo = new EventEmitter<ITrack>();
+  
+  public playlist: PlayList;
 
   constructor(
     private route: ActivatedRoute,
@@ -21,6 +26,12 @@ export class PlaylistComponent implements OnInit {
           next: playlist  => this.playlist = playlist,
           error: err => console.log("   EROR  " + err)
         });
+  }
+
+  onPlay(event: Event): void {
+    let id: string = (event.target as Element).id;
+    let track: ITrack  = this.playlist.tracks.find(t => t.id == id);
+    this.demo.emit(track);
   }
 
   onBack(): void {

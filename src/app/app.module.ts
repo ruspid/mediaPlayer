@@ -11,6 +11,7 @@ import { PlaylistComponent } from './playlist/playlist.component';
 import { PlaylistListComponent } from './playlist/playlist-list.component';
 import { RuleComponent } from './rule/rule.component';
 import { TrackComponent } from './track/track.component';
+import { PlayerComponent } from './player/player.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { TrackComponent } from './track/track.component';
     PlaylistComponent,
     PlaylistListComponent,
     RuleComponent,
-    TrackComponent
+    TrackComponent,
+    PlayerComponent
   ],
   imports: [
     BrowserModule,
@@ -33,6 +35,7 @@ import { TrackComponent } from './track/track.component';
       {path: 'rules', component: RuleComponent},
       {path: 'tracks', component: TrackComponent},
       {path: 'playlists/:id', component: PlaylistComponent},
+      {path: 'player', component: PlayerComponent},
       
       {path: '' ,  redirectTo: 'tracks', pathMatch: 'full'},
       {path: '**' ,  redirectTo: 'tracks', pathMatch: 'full'}
