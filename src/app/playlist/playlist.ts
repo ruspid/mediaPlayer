@@ -1,4 +1,5 @@
-import { ITrack } from './track';
+import { ITrack } from '../track/track';
+
 
 export interface IPlayList{
     id: string;

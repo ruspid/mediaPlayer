@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { PlaylistService } from './playlist.service';
-import { ITrack } from './track';
 import { IPlayList } from './playlist';
 import { Router, ActivatedRoute } from '@angular/router';
 

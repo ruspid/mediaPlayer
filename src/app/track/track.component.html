@@ -1,0 +1,29 @@
+<div class='card-body'>
+    <div class='col-md-4'>
+        <input type='text' [(ngModel)]='playlistName'/>
+      </div>
+    <div class='table-responsive'>
+        <table class='table' *ngIf='tracks && tracks.length'>
+            <thead>
+                <tr>
+                    <th>nazwa </th>
+                    <th>ilość utworów</th>
+                    <th>długość</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor='let track of tracks'>
+                    <td>{{track.title}}</td>
+                    <td>{{track.artist}}</td>
+                    <td>{{track.duration}}</td>
+                    <td>
+                        <input type="checkbox" id={{track.id}} (change)="onActionOnRow($event)" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <button class="btn btn-primary" [disabled]="!(playlistName && playlistName.length)" (click)='createPlaylist()'>
+        Utwórz playliste
+    </button>
+</div>

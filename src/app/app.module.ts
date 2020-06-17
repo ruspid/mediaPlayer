@@ -14,6 +14,7 @@ import { ProductDetailGuard } from './product/product-detail.guard';
 import { PlaylistComponent } from './playlist/playlist.component';
 import { PlaylistListComponent } from './playlist/playlist-list.component';
 import { RuleComponent } from './rule/rule.component';
+import { TrackComponent } from './track/track.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { RuleComponent } from './rule/rule.component';
     PlaylistComponent,
     WelcomeComponent,
     PlaylistListComponent,
-    RuleComponent
+    RuleComponent,
+    TrackComponent
   ],
   imports: [
     BrowserModule,
@@ -38,6 +40,7 @@ import { RuleComponent } from './rule/rule.component';
       {path: 'products', component: ProductListComponent},
       {path: 'playlists', component: PlaylistListComponent},
       {path: 'rules', component: RuleComponent},
+      {path: 'tracks', component: TrackComponent},
       {path: 'playlists/:id', component: PlaylistComponent},
       {path: 'products/:id', 
       canActivate: [ProductDetailGuard],

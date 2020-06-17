@@ -111,6 +111,7 @@ onBehavioralStateChange(event) {
   onCommunicationAttemptChange(event) {
   const formArray: FormArray = this.ruleForm.get('communicationAttempt') as FormArray;
   this.handleEventByForm(formArray, event);
+
 }
 
 }

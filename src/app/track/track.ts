@@ -1,5 +1,5 @@
 export interface ITrack{
-    id: number;
+    id: string;
     artist: string;
     duration:  number;
     title: string;
