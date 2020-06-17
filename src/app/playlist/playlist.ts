@@ -1,7 +1,7 @@
 import { ITrack } from '../track/track';
 
 
-export interface IPlayList{
+export class PlayList{
     id: string;
     tracks: ITrack[];
     name: string;

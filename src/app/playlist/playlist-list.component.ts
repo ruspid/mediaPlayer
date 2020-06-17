@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PlaylistService } from './playlist.service';
-import { IPlayList } from './playlist';
+import { PlayList } from './playlist';
 
 @Component({
   templateUrl: './playlist-list.component.html',
@@ -10,7 +10,7 @@ export class PlaylistListComponent implements OnInit {
 
   constructor(private _playlistService: PlaylistService) { }
 
-  playlists: IPlayList[];
+  playlists: PlayList[];
 
   ngOnInit(): void {
     this._playlistService.getPlaylistList().subscribe({

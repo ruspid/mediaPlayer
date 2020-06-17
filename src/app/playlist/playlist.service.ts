@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import {catchError, tap} from 'rxjs/operators'
-import { IPlayList } from './playlist';
+import { PlayList } from './playlist';
 
 @Injectable({
     providedIn: 'root'
@@ -14,15 +14,15 @@ export class PlaylistService{
 
   constructor(private httpClient: HttpClient){}
 
-  getPlaylist(id: string): Observable<IPlayList>{
-        return this.httpClient.get<IPlayList>(this.playlistUrl).pipe(
+  getPlaylist(id: string): Observable<PlayList>{
+        return this.httpClient.get<PlayList>(this.playlistUrl).pipe(
           // tap(data => console.log('All: ' + JSON.stringify(data))),
           catchError(this.handleError)
         );
   }
 
-  getPlaylistList(): Observable<IPlayList[]>{
-    return this.httpClient.get<IPlayList[]>(this.playlistListUrl).pipe(
+  getPlaylistList(): Observable<PlayList[]>{
+    return this.httpClient.get<PlayList[]>(this.playlistListUrl).pipe(
       // tap(data => console.log('All: ' + JSON.stringify(data))),
       catchError(this.handleError)
     );

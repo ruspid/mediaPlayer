@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Rule, BehavioralState, CommunicationAttempt } from './rule';
 import { FormGroup, FormBuilder, FormArray, Validators, FormControl } from '@angular/forms';
 import { PlaylistService } from '../playlist/playlist.service';
-import { IPlayList } from '../playlist/playlist';
+import { PlayList } from '../playlist/playlist';
 
 @Component({
   selector: 'pm-rule',
@@ -12,7 +12,7 @@ import { IPlayList } from '../playlist/playlist';
 export class RuleComponent implements OnInit {
 
   rule: Rule = new Rule();
-  playlists: IPlayList[];
+  playlists: PlayList[];
   ruleForm: FormGroup;
 
   behavioralStates: string[] = Object.keys(BehavioralState).filter(k => typeof BehavioralState[k as any] === "number");

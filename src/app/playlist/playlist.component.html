@@ -4,7 +4,7 @@
   </div>
   <div class='card-body'>
     <div class='table-responsive'>
-      <table class='table' *ngIf = 'playlist.tracks && playlist.tracks.length'>
+      <table class='table' *ngIf = 'playlist && playlist.tracks && playlist.tracks.length'>
         <thead>
           <tr>
             <th>nazwa {{playlist.name}}</th>

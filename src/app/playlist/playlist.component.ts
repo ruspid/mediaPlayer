@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PlaylistService } from './playlist.service';
-import { IPlayList } from './playlist';
+import { PlayList } from './playlist';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -8,7 +8,7 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./playlist.component.css']
 })
 export class PlaylistComponent implements OnInit {
-  playlist: IPlayList;
+  playlist: PlayList;
 
   constructor(
     private route: ActivatedRoute,
