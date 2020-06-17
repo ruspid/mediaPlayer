@@ -6,14 +6,28 @@
             <input type="text" id="name" class="form-control" formControlName="name">
         </div>
 
-        <div class="form-group form-check" *ngFor="let state of behavioralStates">
-          <input class="form-check-input" [value]="state" type="checkbox" (change)="onBehavioralStateChange($event)" id="behavioralState">
-          <label class="form-check-label" for="state">{{state}}</label>
+        <div class="form-group">
+            <label>Zachowanie</label>
+            <div class="form-group form-check" *ngFor="let state of behavioralStates">
+                <input class="form-check-input" [value]="state" type="checkbox" (change)="onBehavioralStateChange($event)" id="behavioralState">
+                <label class="form-check-label" for="state">{{state}}</label>
+            </div>
         </div>
         
-        <div class="form-group form-check" *ngFor="let attempt of CommunicationAttempts">
-            <input class="form-check-input" [value]="attempt" type="checkbox" (change)="onCommunicationAttemptChange($event)" id="communicationAttempt">
-            <label class="form-check-label" for="attempt">{{attempt}}</label>
+        <div class="form-group">
+            <label>Rodzaj komunikatu</label> 
+            <div class="form-group form-check" *ngFor="let attempt of communicationAttempts">
+                <input class="form-check-input" [value]="attempt" type="checkbox" (change)="onCommunicationAttemptChange($event)" id="communicationAttempt">
+                <label class="form-check-label" for="attempt">{{attempt}}</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Playlisty</label> 
+            <div class="form-group form-check" *ngFor="let playlist of playlists">
+                <input class="form-check-input" [value]="playlist.name" type="checkbox" (change)="onPlaylistChange($event)" id="playlist">
+                <label class="form-check-label" for="playlist">{{playlist.name}}</label>
+            </div>
         </div>
 
         <button class="btn btn-success" [disabled]="ruleForm.invalid" type="submit">Enregistrer</button>

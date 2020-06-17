@@ -17,14 +17,14 @@ export class PlaylistService{
 
   getPlaylist(id: string): Observable<IPlayList>{
         return this.httpClient.get<IPlayList>(this.playlistUrl).pipe(
-          tap(data => console.log('All: ' + JSON.stringify(data))),
+          // tap(data => console.log('All: ' + JSON.stringify(data))),
           catchError(this.handleError)
         );
   }
 
   getPlaylistList(): Observable<IPlayList[]>{
     return this.httpClient.get<IPlayList[]>(this.playlistListUrl).pipe(
-      tap(data => console.log('All: ' + JSON.stringify(data))),
+      // tap(data => console.log('All: ' + JSON.stringify(data))),
       catchError(this.handleError)
     );
 }
