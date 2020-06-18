@@ -11,7 +11,7 @@ import { ITrack } from '../track/track';
 })
 export class PlaylistComponent implements OnInit {
   
-  @Output() demo = new EventEmitter<ITrack>();
+  @Output() event = new EventEmitter<ITrack>();
   
   public playlist: PlayList;
 
@@ -31,7 +31,7 @@ export class PlaylistComponent implements OnInit {
   onPlay(event: Event): void {
     let id: string = (event.target as Element).id;
     let track: ITrack  = this.playlist.tracks.find(t => t.id == id);
-    this.demo.emit(track);
+    this.event.emit(track);
   }
 
   onBack(): void {
