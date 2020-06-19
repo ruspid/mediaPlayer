@@ -6,18 +6,11 @@ import { PlaylistComponent } from '../playlist/playlist.component';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 import { Observable } from 'rxjs';
 
-interface Message {
-  name: string; message: string; type: string;
-}
 
 interface TrackMessage {
   type: string; object: ITrack;
 }
 
-
-interface MessageCount {
-  messagecount: number; type: string;
-}
 
 @Component({
   templateUrl: './player.component.html',
@@ -27,14 +20,8 @@ export class PlayerComponent implements OnInit {
 
   @ViewChild(PlaylistComponent) playlistComponent;
 
-  messages: Message[] = [];
-  name: string;
-  message: string;
-  numberOfMessages = 0;
-
   ws: WebSocketSubject<any>;
   message$: Observable<TrackMessage>;
-  messageNumber$: Observable<MessageCount>;
 
   connected: boolean;
 
@@ -111,12 +98,6 @@ export class PlayerComponent implements OnInit {
       message => message.type === 'message'
     );
 
-    this.messageNumber$ = this.ws.multiplex(
-      () => ({ subscribe: 'messageNumber' }),
-      () => ({ unsubscribe: 'messageNumber' }),
-      message => message.type === 'messageNumber'
-    );
-
     // subscribe to messages sent from the server
     this.message$.subscribe(
       value => 
@@ -128,12 +109,6 @@ export class PlayerComponent implements OnInit {
       () => this.disconnect()
     );
 
-    // get the number of the messages from the server
-    this.messageNumber$.subscribe(
-      value => this.numberOfMessages = value.messagecount,
-      error => this.disconnect(error),
-      () => this.disconnect()
-    );
 
     this.setConnected(true);
   }
@@ -144,14 +119,13 @@ export class PlayerComponent implements OnInit {
     console.log('Disconnected');
   }
 
-  sendMessage() {
-    this.ws.next({ name: this.name, message: this.message, type: 'message' });
-    this.message = '';
-  }
+  // sendMessage() {
+  //   this.ws.next({ name: this.name, message: this.message, type: 'message' });
+  //   this.message = '';
+  // }
 
   setConnected(connected) {
     this.connected = connected;
-    this.messages = [];
   }
 
 }

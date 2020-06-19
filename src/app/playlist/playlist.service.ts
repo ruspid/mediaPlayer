@@ -10,19 +10,23 @@ import { PlayList } from './playlist';
 export class PlaylistService{
 
   private playlistUrl = 'api/playlist.json';
-  private playlistListUrl = 'api/playlists.json';
+
+  // private playlistListUrl = 'api/playlists.json';
+
+  private playlistsUrl = 'http://localhost:8080/playlists';
+
 
   constructor(private httpClient: HttpClient){}
 
   getPlaylist(id: string): Observable<PlayList>{
-        return this.httpClient.get<PlayList>(this.playlistUrl).pipe(
+        return this.httpClient.get<PlayList>(this.playlistsUrl.concat("/"+id)).pipe(
           // tap(data => console.log('All: ' + JSON.stringify(data))),
           catchError(this.handleError)
         );
   }
 
   getPlaylistList(): Observable<PlayList[]>{
-    return this.httpClient.get<PlayList[]>(this.playlistListUrl).pipe(
+    return this.httpClient.get<PlayList[]>(this.playlistsUrl).pipe(
       // tap(data => console.log('All: ' + JSON.stringify(data))),
       catchError(this.handleError)
     );

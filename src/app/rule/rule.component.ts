@@ -3,6 +3,8 @@ import { Rule, BehavioralState, CommunicationAttempt } from './rule';
 import { FormGroup, FormBuilder, FormArray, Validators, FormControl } from '@angular/forms';
 import { PlaylistService } from '../playlist/playlist.service';
 import { PlayList } from '../playlist/playlist';
+import { RulesService } from './rules.service';
+import { Rules } from './rules';
 
 @Component({
   selector: 'pm-rule',
@@ -15,12 +17,19 @@ export class RuleComponent implements OnInit {
   playlists: PlayList[];
   ruleForm: FormGroup;
 
-  behavioralStates: string[] = Object.keys(BehavioralState).filter(k => typeof BehavioralState[k as any] === "number");
-  communicationAttempts: string[] = Object.keys(CommunicationAttempt).filter(k => typeof CommunicationAttempt[k as any] === "number");
+  behavioralStates: string[];
+  communicationAttempts: string[];
 
-  constructor(private formBuilder: FormBuilder, private playlistService: PlaylistService) { }
+  // behavioralStates: string[] = Object.keys(BehavioralState).filter(k => typeof BehavioralState[k as any] === "number");
+  // communicationAttempts: string[] = Object.keys(CommunicationAttempt).filter(k => typeof CommunicationAttempt[k as any] === "number");
+
+
+  constructor(private formBuilder: FormBuilder, private playlistService: PlaylistService, private rulesService: RulesService) { }
 
   ngOnInit() {
+    this.rulesService.getOptions().subscribe({
+      next: rules => this.initValues(rules)
+    })
     this.playlistService.getPlaylistList().subscribe({
       next: playlists  => {
         this.playlists = playlists;
@@ -30,6 +39,12 @@ export class RuleComponent implements OnInit {
     this.initForm();
   }
 
+  initValues(rules: Rules): void {
+    this.behavioralStates = rules.behavioralStates;
+    this.communicationAttempts = rules.communicationAttempts;
+  }
+
+  
   
 
   initForm() {
