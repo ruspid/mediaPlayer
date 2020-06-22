@@ -5,30 +5,37 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ITrack } from '../track/track';
 
 @Component({
-  templateUrl: './playlist.component.html',
-  styleUrls: ['./playlist.component.css']
+  selector: "playlist-iner-component",
+  templateUrl: './playlist-iner.component.html',
+  styleUrls: ['./playlist-iner.component.css']
 })
-export class PlaylistComponent implements OnInit {
+export class PlaylistInerComponent implements OnInit {
+  
+  @Output() event = new EventEmitter<ITrack>();
   
   public playlist: PlayList;
+  public playlists: PlayList[];
   
-
   constructor(
     private route: ActivatedRoute,
     private router: Router, 
-    private _playlistService: PlaylistService){}
+    private playlistService: PlaylistService){}
 
   ngOnInit(): void {
-    let id: string = this.route.snapshot.paramMap.get('id');
-    this._playlistService.getPlaylist(id).subscribe({
-          next: playlist  => this.playlist = playlist,
-          error: err => console.log("   EROR  " + err)
-        });
+    this.playlistService.getPlaylistList().subscribe({
+      next: playlists => this.initPlaylist(playlists)
+    })
+  }
+
+  initPlaylist(playlists: PlayList[]){
+    this.playlists = playlists
+    this.playlist = playlists[0];
   }
 
   onPlay(event: Event): void {
     let id: string = (event.target as Element).id;
     let track: ITrack  = this.playlist.tracks.find(t => t.id == id);
+    this.event.emit(track);
   }
 
   onBack(): void {

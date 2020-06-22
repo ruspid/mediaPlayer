@@ -1,8 +1,9 @@
 export class Rule {
+    id: string;
     name: string;
     behavioralState: BehavioralState;
     communicationAttempt: CommunicationAttempt;
-    playlistId: string;
+    playlist: string;
     contexts: Context[];
     time: Time;
 }

@@ -1,0 +1,23 @@
+<div class='card'>
+    <div class='card-body'>
+      <div class='table-responsive'>
+        <table class='table' *ngIf = 'rules && rules.length'>
+          <thead>
+            <tr>
+              <th>nazwa</th>
+              <th>behavioralState</th>
+              <th>CommunicationAttempt</th>
+              <th>Playlist</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor='let rule of rules'>
+                <td>{{rule.name}}</td>
+              <td>{{rule.behavioralState}}</td>
+              <td>{{rule.communicationAttempt}}</td>
+              <td>{{rule.playlist}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>

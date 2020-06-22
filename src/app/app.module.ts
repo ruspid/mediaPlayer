@@ -12,6 +12,8 @@ import { PlaylistListComponent } from './playlist/playlist-list.component';
 import { RuleComponent } from './rule/rule.component';
 import { TrackComponent } from './track/track.component';
 import { PlayerComponent } from './player/player.component';
+import { PlaylistInerComponent } from './playlist/playlist-iner.component';
+import { RuleListComponent } from './rule/rule-list/rule-list.component';
 
 
 @NgModule({
@@ -20,10 +22,12 @@ import { PlayerComponent } from './player/player.component';
     ConvertToSpacesPipe,
     StarComponent,
     PlaylistComponent,
+    PlaylistInerComponent,
     PlaylistListComponent,
     RuleComponent,
     TrackComponent,
-    PlayerComponent
+    PlayerComponent,
+    RuleListComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +36,8 @@ import { PlayerComponent } from './player/player.component';
     HttpClientModule,
     RouterModule.forRoot([
       {path: 'playlists', component: PlaylistListComponent},
-      {path: 'rules', component: RuleComponent},
+      {path: 'rules', component: RuleListComponent},
+      {path: 'rules/new', component: RuleComponent},
       {path: 'tracks', component: TrackComponent},
       {path: 'playlists/:id', component: PlaylistComponent},
       {path: 'player', component: PlayerComponent},

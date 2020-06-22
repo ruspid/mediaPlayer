@@ -13,7 +13,7 @@ import { Rules } from './rules';
 })
 export class RuleComponent implements OnInit {
 
-  rule: Rule = new Rule();
+  
   playlists: PlayList[];
   ruleForm: FormGroup;
 
@@ -82,11 +82,17 @@ export class RuleComponent implements OnInit {
       communicationAttempts.push(ctrl.value); // types declared on top
     });
   
-  
+    let rule: Rule = new Rule();
+    rule.name = name;
+    rule.behavioralState = behavioralStates[0];
+    rule.communicationAttempt = communicationAttempts[0];
+    rule.playlist = playlists[0];
+
   console.log("  name   " + name)
    console.log(" behavioralStates ", behavioralStates);
    console.log(" communicationAttempts ", communicationAttempts);
    console.log(" playlists  ", playlists);
+   this.rulesService.addRule(rule);
 
   }
 

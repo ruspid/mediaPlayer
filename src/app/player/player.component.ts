@@ -2,9 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { PlayList } from '../playlist/playlist';
 import { PlaylistService } from '../playlist/playlist.service';
 import { ITrack } from '../track/track';
-import { PlaylistComponent } from '../playlist/playlist.component';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 import { Observable } from 'rxjs';
+import { PlaylistInerComponent } from '../playlist/playlist-iner.component';
 
 
 interface TrackMessage {
@@ -18,7 +18,7 @@ interface TrackMessage {
 })
 export class PlayerComponent implements OnInit {
 
-  @ViewChild(PlaylistComponent) playlistComponent;
+  @ViewChild(PlaylistInerComponent) playlistComponent;
 
   ws: WebSocketSubject<any>;
   message$: Observable<TrackMessage>;
@@ -33,12 +33,6 @@ export class PlayerComponent implements OnInit {
 
   ngOnInit(): void {
     this.connect();
-    let playlistName: string = "name";
-    // this.playlist = this.playlistComponent.playlist;
-
-    this.playlistService.getPlaylist(playlistName).subscribe({
-      next: playlist => this.playlist = playlist
-    })
   }
 
   acceptData(track: ITrack) {
