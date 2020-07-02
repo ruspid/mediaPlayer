@@ -12,7 +12,10 @@ export class TrackService{
       console.log(playlistName + "  " + selectedTracks);
     }
 
-    private tracksUrl = 'api/tracks.json';
+    // private tracksUrl = 'api/tracks.json';
+
+    private tracksUrl = 'http://localhost:8080/tracks';
+
 
     constructor(private httpClient: HttpClient){}
   

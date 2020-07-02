@@ -2,14 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { PlayList } from '../playlist/playlist';
 import { PlaylistService } from '../playlist/playlist.service';
 import { ITrack } from '../track/track';
-import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
-import { Observable } from 'rxjs';
 import { PlaylistInerComponent } from '../playlist/playlist-iner.component';
-
-
-interface TrackMessage {
-  type: string; object: ITrack;
-}
+import { PlayerService } from './player.service';
+import { PlayerEventListener } from './player.event.listener';
 
 
 @Component({
@@ -20,42 +15,21 @@ export class PlayerComponent implements OnInit {
 
   @ViewChild(PlaylistInerComponent) playlistComponent;
 
-  ws: WebSocketSubject<any>;
-  message$: Observable<TrackMessage>;
-
   connected: boolean;
 
   playlist: PlayList;
   currentTrack: ITrack;
-  isPlaying: boolean = false;
+  isPlaying: boolean;
 
-  constructor(private playlistService: PlaylistService) {}
-
-  ngOnInit(): void {
-    this.connect();
+  constructor(private playlistService: PlaylistService, private playerService: PlayerService, private playerEventListener: PlayerEventListener) {
+    playerEventListener.player(this);
   }
+
+  ngOnInit(): void {}
 
   acceptData(track: ITrack) {
-    console.log(
-      "this is the child data displaying in parent component: ",
-      track.title
-    );
+    this.playerService.play(track);
     this.currentTrack = track;
-  }
-
-  nextTrack() {
-    if(!this.currentTrack) return;
-    let indexOfCurrentlyPlayingTrack: number = this.indexOfCurrentlyPlayingTrack();
-    if(indexOfCurrentlyPlayingTrack < this.playlist.totalTracks){
-      this.currentTrack = this.playlist.tracks[indexOfCurrentlyPlayingTrack+1]
-    }
-  }
-  previousTrack() {
-    if(!this.currentTrack) return;
-    let indexOfCurrentlyPlayingTrack: number = this.indexOfCurrentlyPlayingTrack();
-    if(indexOfCurrentlyPlayingTrack >= 0){
-      this.currentTrack = this.playlist.tracks[indexOfCurrentlyPlayingTrack-1]
-    }
   }
 
   indexOfCurrentlyPlayingTrack(): number{
@@ -64,62 +38,51 @@ export class PlayerComponent implements OnInit {
     .findIndex(t => t == this.currentTrack.id)
   }
 
-  playOrStop() {
-    if(this.isPlaying) 
-      this.play()
+  resumeOrPause() {
+    if(this.isPlaying === false) 
+      this.resume()
     else
-      this.stop()
+      this.pause()
   }
 
-  private play(): void{
+  resume(): void{
+    this.playerService.resume();
+  }
 
+  play(track: ITrack): void{
+    this.playerService.play(track);
   }
 
 
-  private stop(): void{
+  pause(): void{
+    this.playerService.pause();
+  }
 
+  next(): void{
+    this.playerService.next();
   }
 
 
-  connect() {
-    // use wss:// instead of ws:// for a secure connection, e.g. in production
-    this.ws = webSocket('ws://localhost:8080/player'); // returns a WebSocketSubject
-
-    //  split the subject into 2 observables, depending on object.type
-    this.message$ = this.ws.multiplex(
-      () => ({subscribe: 'message'}),
-      () => ({unsubscribe: 'message'}),
-      message => message.type === 'message'
-    );
-
-    // subscribe to messages sent from the server
-    this.message$.subscribe(
-      value => 
-      { 
-        this.currentTrack = value.object;
-        console.log("recidved message " + JSON.stringify(value))
-      },
-      error => this.disconnect(error),
-      () => this.disconnect()
-    );
-
-
-    this.setConnected(true);
+  previuos(): void{
+    this.playerService.previuos()
   }
 
-  disconnect(err?) {
-    if (err) { console.error(err); }
-    this.setConnected(false);
-    console.log('Disconnected');
+  resumed(): void{
+    this.isPlaying = true;
   }
 
-  // sendMessage() {
-  //   this.ws.next({ name: this.name, message: this.message, type: 'message' });
-  //   this.message = '';
-  // }
+  played(track: ITrack) {
+    this.currentTrack = track;
+    this.isPlaying = true;
+  }
 
-  setConnected(connected) {
-    this.connected = connected;
+  paused(): void{
+    this.isPlaying = false;
+  }
+
+  playlistPlayed(playlist: PlayList) {
+    this.playlist = playlist;
+    this.played(playlist.tracks[0]);
   }
 
 }

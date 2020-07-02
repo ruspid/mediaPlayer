@@ -3,31 +3,14 @@
   <div class='card-body' *ngIf='currentTrack'>
     <p>{{currentTrack.title}}</p>
   </div>
-  <button class="btn btn-primary" (click)='previousTrack()'>
+  <button class="btn btn-primary" (click)='previuos()'>
     |< </button>
-      <button class="btn btn-primary" (click)='playOrStop()'>
+      <button class="btn btn-primary" (click)='resumeOrPause()'>
         ||
       </button>
-      <button class="btn btn-primary" (click)='nextTrack()'>
+      <button class="btn btn-primary" (click)='next()'>
         >|
       </button>
       <playlist-iner-component (event)="acceptData($event)"></playlist-iner-component>
 
-</div>
-
-<div id="main-content" class="container mt-2"></div>
-<div class="row">
-  <div class="col-md-12">
-    <form class="form-inline">
-      <div class="form-group">
-        <span>WebSocket Status:
-          <span class="{{connected ? 'text-success' : 'text-danger'}}">
-            <strong>{{ connected ? 'Connected' : 'Disconnected'}}</strong>
-          </span>
-        </span>
-        <button class="btn btn-sm bg-light ml-2 float right" (click)="connect()" *ngIf="!connected">reconnect</button>
-      </div>
-    </form>
-    <hr>
-  </div>
 </div>
